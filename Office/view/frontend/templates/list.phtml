@@ -1,0 +1,128 @@
+<h1>Department</h1>
+<a href="">Department</a>
+<a href="<?= $block->getBaseUrl().'office/employee/listemployee'?>">Employee</a>
+<form class="" action="<?php echo $block->addDepartment(); ?>" method="post" 
+               data-mage-init='{"validation":{}}'>
+	<fieldset class="fieldset">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Add Form') ?></span></legend><br>
+        <div class="field required">
+            <label for="Name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text" id="number"
+                       name="name"
+                       autofocus
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       data-msg-required="Vui long khong de trong" >
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Submit') ?></span>
+            </button>
+        </div>
+    </div>
+
+
+	<!-- <label>Name: </label><br>
+	<input type="text" name="name"> -->
+</form>
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	
+	<?php
+
+	foreach ($block->getDepartment() as $department){
+    ?>    
+    <tr>
+        <td><?= $department->getId(); ?></td>
+        <td><?= $department->getName(); ?></td>
+        <td>
+            <button class="delete action"  type="button" >
+                Delete</button>
+            <a href="<?= $block->getBaseUrl().'office/department/edit/id/'.$department->getId(); ?>">Edit</a>
+        </td>
+        </tr>
+    <?php }   
+    ?>
+    </tbody>
+</table>
+<script>
+    
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm',
+        'mage/translate',
+    ],  function ($, confirm, $t) {
+        $(".delete").on('click', function () {
+            confirm({
+                title: 'Warning!',
+                content: $t('Are you sure to delete this ?'),
+                actions: {
+                    /** @inheritdoc */
+                    confirm: function () {
+                        window.location.href = "<?= $block->deleteDp().$department->getId(); ?>";
+                    }
+                }
+            });
+        });
+    })
+</script>
+
+<!-- <div id="popup-modal" style="display:none;">
+    <h3> Are you sure to delete this ? </h3>
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Warning !',
+                buttons: [{
+                    text: $.mage.__('OK'),
+                    class: 'action primary accept',
+                    click: function () {
+                        
+                    }
+                    }, {
+                    text: $.mage.__('Cancel'),
+                    class: 'action',
+
+                    /**
+                     * Click handler.
+                     */
+                    click: function () {
+                        this.closeModal();
+                    }    
+
+                }]
+            };
+
+            var popup = modal(options, $('#popup-modal'));
+            $(".click-me").on('click',function(){ 
+                if (!confirm('are u sure')) {
+                    return false;
+                }
+                
+            });
+        }   
+    );
+</script> -->

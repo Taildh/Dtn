@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Dtn_Lables::lables"
+             title="Lables"
+             module="Dtn_Lables"
+             sortOrder="1"
+             action="lables/lable/index"
+             parent="Magento_Catalog::catalog"
+             resource="Dtn_Lables::lables" />
+    </menu>
+</config>

@@ -1,0 +1,71 @@
+<h1>Employee</h1>
+<span>Edit</span>
+<form class="" action="<?= $block->saveEdit(); ?>" method="post">
+	<fieldset class="fieldset">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Edit Form') ?></span></legend><br>
+        <div class="control">
+                <input type="hidden"
+                       name="entity_id" value="<?= $block->edit()->getEntity_id(); ?>"
+                       class="input-text">
+        </div>
+        <div class="field required">
+            <label for="Name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Email') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="email" value="<?= $block->edit()->getEmail(); ?>"
+                       class="input-text">
+            </div>
+        </div>
+        <div class="field required">
+            <label for="Name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Department_id') ?></span>
+            </label>
+            <div class="control">
+                <select name="department_id">
+                    <?php foreach($block->getDepartment() as $department): ?>
+                        <option value="<?= $department->getId(); ?>"
+                            <?php if ($department->getId() == $block->edit()->getDepartment_id()): ?>
+                                selected
+                            <?php endif ?> > <!--Dong the option -->
+                            <?= $department->getId(); ?>
+                        </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+        </div>
+        <div class="field required">
+            <label for="Name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('First Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="firstname" value="<?= $block->edit()->getFirstname(); ?>"
+                       class="input-text">
+            </div>
+        </div>
+        <div class="field required">
+            <label for="Name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Last Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="lastname" value="<?= $block->edit()->getLastname(); ?>"
+                       class="input-text">
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Update') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Update') ?></span>
+            </button>
+        </div>
+    </div>
+
+
+	<!-- <label>Name: </label><br>
+	<input type="text" name="name"> -->
+</form>
+

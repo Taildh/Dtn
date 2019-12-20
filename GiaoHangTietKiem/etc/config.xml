@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <customshipping>
+                <active>0</active>
+                <title>Giao Hang Tiet Kiem</title>
+                <name>Giao Hang Tiet Kiem</name>
+                <shipping_cost>0</shipping_cost>
+                <x>100</x>
+                <y>15</y>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>15</sort_order>
+                <model>Dtn\GiaoHangTietKiem\Model\Carrier\GiaoHangTietKiem</model>
+            </customshipping>
+        </carriers>
+    </default>
+</config>

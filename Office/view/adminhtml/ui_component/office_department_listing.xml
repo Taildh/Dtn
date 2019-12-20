@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">office_department_listing.office_department_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add New Department</label>
+            </button>
+        nt/UiComponentFactory.php:174 Stack trace: #0 /home/huutai/project/magentoxin/vendor/magento/framework/View/Element/UiComponentFactory.php(2</buttons>
+        <spinner>office_department_columns</spinner>
+        <deps>
+            <dep>office_department_listing.office_department_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource component="Magento_Ui/js/grid/provider" name="office_department_listing_data_source">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>dtn_office::department</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="office_department_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+        <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+            <filterSelect name="store_id" provider="${ $.parentName }">
+                <settings>
+                    <captionValue>0</captionValue>
+                    <options class="Magento\Cms\Ui\Component\Listing\Column\Cms\Options"/>
+                    <label translate="true">Store View</label>
+                    <dataScope>store_id</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="office/department/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <url path="cms/page/massDisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <url path="cms/page/massEnable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>office_department_listing.office_department_listing.office_department_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="office_department_columns">
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="office/department/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">entity_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">office_department_listing.office_department_listing.office_department_columns.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">office_department_listing.office_department_listing.office_department_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="entity_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="name">
+          <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+               <item name="editor" xsi:type="array">
+                  <item name="editorType" xsi:type="string">text</item>
+                  <item name="validation" xsi:type="array">
+                     <item name="required-entry" xsi:type="boolean">true</item>
+                  </item>
+               </item>
+               <item name="label" xsi:type="string" translate="true">Name</item>
+               <item name="sortOrder" xsi:type="string">4</item>
+            </item>
+          </argument>
+        </column>
+        <!-- <column name="name">
+            <settings>
+                <filter>text</filter>
+                <editor>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Name</label>
+            </settings>
+        </column> -->
+
+        <!-- <column name="qff_number">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">QFF Number</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column> -->
+        <!-- <column name="points_earned">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Points Earned</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column> -->
+        <!-- <column name="amount_spent">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Amount Spent</label>
+                <editor>
+                    <editorType>text</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">false</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column> -->
+        <!-- <column name="time_stamp" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Time Stamp</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column> -->
+        <actionsColumn class="Dtn\Office\Ui\Component\Listing\Grid\Column\Action" name="actions">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

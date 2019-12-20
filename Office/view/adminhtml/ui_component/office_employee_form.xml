@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">office_employee_form.employee_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Dtn\Office\Block\Adminhtml\Employee\Edit\SaveButton"/>
+            <button name="delete" class="Magento\Cms\Block\Adminhtml\Page\Edit\DeleteButton"/>
+            <button name="back" class="Magento\Cms\Block\Adminhtml\Page\Edit\BackButton"/>
+        </buttons>
+        <namespace>office_employee_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>office_employee_form.employee_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="employee_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="office/employee/save"/>
+        </settings>
+        <dataProvider class="Dtn\Office\Model\Employee\DataProvider" name="employee_form_data_source">
+            <settings>
+                <requestFieldName>entity_id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="entity_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">employee</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>entity_id</dataScope>
+            </settings>
+        </field>
+        <field name="department_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Dtn\Office\Model\Attribute\Source\SourceName</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Department Id</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">sliders</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                    <item name="dataScope" xsi:type="string">department_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="email" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">email</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Email</label>
+                <dataScope>email</dataScope>
+            </settings>
+        </field>
+        <field name="firstname" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">firstname</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">First Name</label>
+                <dataScope>firstname</dataScope>
+            </settings>
+        </field>
+        <field name="lastname" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">lastname</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Last Name</label>
+                <dataScope>lastname</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>

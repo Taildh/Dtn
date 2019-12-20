@@ -1,0 +1,26 @@
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+
+	
+	<?php
+
+	foreach ($block->getDepartment() as $department){
+        echo '<tr>
+        <td>'.$department->getId().'</td>
+        <td>'.$department->getName().'</td>';
+        echo '<td>
+        <a href="'.$block->getBaseUrl().'office/department/edit/id/'.$department->getId().'">Edit</a>
+        <a href="'.$block->getBaseUrl().'office/department/delete/id/'.$department->getId().'" class="click-me" >Delete</a>
+        </td>
+        </tr>';
+    }   
+
+    ?>
+    </tbody>
+</table>

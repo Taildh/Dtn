@@ -1,0 +1,150 @@
+<h1>Employee</h1>
+<a href="<?= $block->getBaseUrl().'office/department/listt'?>">Department</a>
+<a href="<?= $block->getBaseUrl().'office/employee/listemployee'?>">Employee</a>
+<form class="" action="<?= $block->addEmployee(); ?>" method="post"
+               data-mage-init='{"validation":{}}'>
+	<fieldset class="fieldset">
+        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Add Form') ?></span></legend><br>
+        <div class="field required">
+            <label for="" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Email') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="email"
+                       autofocus
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       data-msg-required="Vui long khong de trong" >
+            </div>
+        </div>
+        <div class="field">
+          <label for="" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Department_id') ?></span>
+            </label>
+            <div class="control">
+              <select name="department_id">
+                <?php foreach($block->getDepartment() as $department): ?>
+                  <option value="<?= $department->getId(); ?>"><?= $department->getId(); ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+        </div>
+        <div class="field required">
+            <label for="" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('First Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="firstname"
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       data-msg-required="Vui long khong de trong" >
+            </div>
+        </div>
+        <div class="field required">
+            <label for="" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Last Name') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="lastname"
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       data-msg-required="Vui long khong de trong" >
+            </div>
+        </div>
+        <div class="field required">
+            <label for="" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Date of birth') ?></span>
+            </label>
+            <div class="control">
+                <input type="datetime-local"
+                       name="dob"
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       data-msg-required="Vui long khong de trong" >
+            </div>
+        </div>
+        <div class="field required">
+            <label for="" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Salary') ?></span>
+            </label>
+            <div class="control">
+                <input type="text"
+                       name="salary"
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       data-msg-required="Vui long khong de trong" >
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" claEdit
+￼ss="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Submit') ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Department_id</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>DOB</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+  <?php
+
+  foreach ($block->getEmployee() as $employee){
+    ?>
+      <tr>
+        <td><?= $employee->getId(); ?></td>
+        <td><?= $employee->getDepartment_id(); ?></td>
+        <td><?= $employee->getEmail(); ?></td>
+        <td><?= $employee->getFirstname(); ?></td>
+        <td><?= $employee->getLastname() ;?></td>
+        <td><?= $employee->getDob() ;?></td>
+        <td><?= $employee->getSalary() ;?></td>
+      <td>
+
+        <button class="delete action" src="<?= $block->editEmployee().$employee->getId() ?>" type="button" class="primary">
+            Delete</button>
+        <a href="<?= $block->editEmployee().$employee->getId();?>">Edit</a>
+        </td>
+        </tr>
+    <?php
+    }
+
+    ?>
+    </tbody>
+</table>
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm',
+        'mage/translate',
+    ], function ($, confirm, $t) {
+        $(".delete").on('click', function () {
+            confirm({
+                title: 'Warning!',
+                content: $t('Are you sure to delete this ?'),
+                actions: {
+                    /** @inheritdoc */
+                    confirm: function () {
+                        window.location.href = "<?= $block->deleteEmployee().$employee->getId(); ?>";
+                    }
+                }
+            });
+        });
+    })
+</script>
